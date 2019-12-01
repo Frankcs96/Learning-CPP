@@ -1,35 +1,37 @@
 #include <iostream>
 // We are going to create a videogame log class
 class Log {
+public:
 
-  int m_LogLevelM = logLevelInfo;
+  enum Level {
+    levelError, levelWarning, levelInfo
+  };
+private:
+  Level m_LogLevelM = levelInfo;
 
 
 public:
-  const int logLevelError = 0;
-  const int logLevelWarning = 1;
-  const int logLevelInfo = 2;
 
-  void setLevel(int level) {
+  void setLevel(Level level) {
     m_LogLevelM = level;
   }
 
   void warn(const char* message) {
-    if (m_LogLevelM >= logLevelWarning) {
+    if (m_LogLevelM >= levelWarning) {
       std::cout << "[WARNING]: " << message << std::endl;
     }
    
   }
 
   void info(const char* message) {
-    if (m_LogLevelM >= logLevelInfo) {
+    if (m_LogLevelM >= levelInfo) {
       std::cout << "[INFO]: " << message << std::endl;
     }
    
   }
 
   void error(const char* message) {
-    if (m_LogLevelM >= logLevelError) {
+    if (m_LogLevelM >= levelError) {
       std::cout << "[ERROR]: " << message << std::endl;
     }
     
@@ -42,7 +44,7 @@ public:
 int main() {
 
   Log log;
-  log.setLevel(log.logLevelWarning);
+  log.setLevel(Log::levelError);
   log.warn("Hello");
   log.info("Hello");
   log.error("Hello");
